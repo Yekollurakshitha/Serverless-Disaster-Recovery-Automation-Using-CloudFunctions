@@ -1,0 +1,7 @@
+{
+  "bucket_name": "dr-backup-bucket",
+  "backup_file": "backup.zip",
+  "instance_type": "t2.micro",
+  "ami_id": "ami-12345678",
+  "region": "ap-south-1"
+}
