@@ -1,0 +1,34 @@
+import boto3
+
+ec2 = boto3.client('ec2')
+s3 = boto3.client('s3')
+
+def lambda_handler(event, context):
+    
+    instance_id = "YOUR_INSTANCE_ID"
+    bucket_name = "dr-backup-bucket-12345"
+    file_key = "data.txt"   # file in S3
+    download_path = "/tmp/data.txt"
+    
+    try:
+        print("Starting Disaster Recovery...")
+        
+        # Step 1: Restart EC2
+        ec2.reboot_instances(InstanceIds=[instance_id])
+        print("EC2 restarted")
+        
+        # Step 2: Download backup from S3
+        s3.download_file(bucket_name, file_key, download_path)
+        print("Backup downloaded from S3")
+        
+        return {
+            'statusCode': 200,
+            'body': 'Recovery + Backup restore completed'
+        }
+        
+    except Exception as e:
+        print("Error:", str(e))
+        return {
+            'statusCode': 500,
+            'body': str(e)
+        }
