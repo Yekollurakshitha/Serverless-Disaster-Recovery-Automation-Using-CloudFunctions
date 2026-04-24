@@ -227,5 +227,3 @@ New instance created
 🌍 Multi-region DR
 📊 Monitoring dashboard
 🔁 Auto scaling
-👨‍💻 Author
-A Lahari
